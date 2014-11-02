@@ -1,0 +1,3 @@
+--color
+--require test_data
+--require spec_helper
