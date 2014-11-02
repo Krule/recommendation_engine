@@ -49,13 +49,6 @@ class RecommendationEngine
     set.sort_by { |n| n[1] }.reverse.map { |n| n[0] }
   end
 
-  # No. 3 strategy developed
-  # Use hash and index
-  def method_name
-    set = $users_like_products.reduce({}) do |a, e|
-    end
-  end
-
   def intersection_size(user_id)
     (User.find(user_id).products_liked & user.products_liked).size
   end
