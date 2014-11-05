@@ -37,9 +37,38 @@ describe RecommendationEngine do
       it 'does not contains already liked product ids' do
         expect(@recommendations).not_to include(1, 2, 3, 25)
       end
+    end
 
-      it 'contains 10 or less products (default)' do
-        expect(@recommendations.size).to be <= 10
+    context 'Jaccard similarity strategy' do
+
+      before do
+        user = User.find(1)
+        @recommendations = RecommendationEngine.for(user)
+                                               .recommend(:jaccard_similarity)
+      end
+
+      it 'contains expected product ids' do
+        expect(@recommendations).to include(23, 42, 63, 7, 5)
+      end
+
+      it 'does not contains already liked product ids' do
+        expect(@recommendations).not_to include(1, 2, 3, 25)
+      end
+    end
+
+    context 'MinHash strategy' do
+      before do
+        user = User.find(1)
+        @recommendations = RecommendationEngine.for(user)
+                                               .recommend(:min_hash)
+      end
+
+      it 'contains expected product ids' do
+        expect(@recommendations).to include(23, 42, 63, 7, 5)
+      end
+
+      it 'does not contains already liked product ids' do
+        expect(@recommendations).not_to include(1, 2, 3, 25)
       end
     end
   end

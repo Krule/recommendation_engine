@@ -1,5 +1,5 @@
 class User
-  attr_accessor :id, :products_liked
+  attr_accessor :id, :products_liked, :min_hash
 
   def initialize(id)
     @id = id
